@@ -32,3 +32,15 @@ To that we will zip the content of /src into the /dist/${version} from package.j
 ## Privacy
 
 This extension does not collect any personal information and only uses your google cloud sync storage to store the time to click the button.
+
+## Source and delivery
+
+This is a publication mirror when viewed on GitHub. Forgejo is the canonical
+code home; changes pushed directly to the mirror may be overwritten. GitHub
+Issues remains the public feedback inbox. Resolve the canonical code home with
+the owner before preparing changes.
+
+Forgejo checks the packaged extension, referenced files, JavaScript syntax and
+landing page before asking Coolify to deploy the tested main commit. Coolify
+keeps the existing chrome-ping.jace.pro domain, Compose configuration and target.
+The landing page has no persistent application database.

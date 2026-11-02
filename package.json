@@ -4,7 +4,7 @@
   "description": "Chrome Extension to click \"Sign On\" for Ping One",
   "main": "content_script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test",
     "start": "node start.js",
     "build": "node build.js"
   },

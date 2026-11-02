@@ -1,0 +1,27 @@
+name: Checks and deployment
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  checks:
+    runs-on: node24
+    steps:
+      - uses: https://github.com/actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: find src -name '*.js' -exec node --check {} \;
+  deploy:
+    needs: checks
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: node24
+    steps:
+      - uses: https://github.com/actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Deploy the tested main commit
+        run: node scripts/deploy.cjs
+        env:
+          DEPLOY_SHA: ${{ github.sha }}
+          DEPLOY_REF: ${{ github.ref }}
+          COOLIFY_WEBHOOK_SECRET: ${{ secrets.COOLIFY_WEBHOOK_SECRET }}
+          FORGEJO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
